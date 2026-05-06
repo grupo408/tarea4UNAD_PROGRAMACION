@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+*.log
+logs.txt
+
+# pyenv
+.python-version
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+*.sublime-workspace
+*.sublime-project
