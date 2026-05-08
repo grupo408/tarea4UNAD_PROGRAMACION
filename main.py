@@ -2,7 +2,9 @@
 # ejemplo de importación de modulos personalizados
 from logger import Logger
 from entidades import Cliente
+from sistema import Sistema
 
-cliente_prueba = Cliente("Juan Perez", "123456789", "juan@perez.com")
+sistema = Sistema()
 
-Logger.log("Iniciando el programa...")
+sistema.agregar_cliente(Cliente("Juan Pérez", "12345678", "juan@gmail.com"))
+
