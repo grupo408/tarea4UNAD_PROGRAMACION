@@ -1,8 +1,5 @@
 from errores import DatoInvalidoError
-servicios
 from abc import ABC, abstractmethod
-from logger import logger
-main
 
 class EntidadGeneral(ABC):
     def __init__(self, id=None):
@@ -78,32 +75,18 @@ class Cliente(EntidadGeneral):
                     self.__telefono])
 
 # Servicios
-servicios
 class Servicio(EntidadGeneral, ABC):
     def __init__(self, id=None, nombre=None):
         super().__init__(id)
         if not nombre:
             raise DatoInvalidoError("El nombre del servicio no puede estar vacío.")
         self.nombre = nombre
-class Servicio(EntidadGeneral):
-    
-    pass
-class ServicioA(Servicio):
-    pass
-
-class ServicioB(Servicio):
-    pass
-
-class ServicioC(Servicio):
-    pass
-
-main
 
     def __str__(self):
         return f"Servicio({self.nombre})"
 
     @abstractmethod
-    def descripcion(self):
+    def describir(self):
         raise NotImplementedError("Los servicios deben implementar una descripción.")
 
     @abstractmethod
@@ -129,7 +112,7 @@ class ServicioReservaSalas(Servicio):
         self.precio_hora = precio_hora
         self.validar_parametros()
 
-    def descripcion(self):
+    def describir(self):
         return (
             f"Reserva de sala {self.sala_numero}: precio {self.precio_hora:.2f} por hora"
         )
@@ -158,7 +141,7 @@ class ServicioAlquilerEquipos(Servicio):
         self.precio_hora = precio_hora
         self.validar_parametros()
 
-    def descripcion(self):
+    def describir(self):
         return f"Alquiler de equipo {self.equipo_tipo}: precio {self.precio_por_dia:.2f} por día"
 
     def validar_parametros(self, duracion_horas=None, impuestos=None, descuento=None):
@@ -185,7 +168,7 @@ class ServicioAsesoriasEspecializadas(Servicio):
         self.precio_hora = precio_hora
         self.validar_parametros()
 
-    def descripcion(self):
+    def describir(self):
         return f"Asesoría especializada en {self.especialidad}: precio {self.precio_hora:.2f} por hora"
     
     def validar_parametros(self, duracion_horas=None, impuestos=None, descuento=None):
@@ -203,17 +186,3 @@ class ServicioAsesoriasEspecializadas(Servicio):
         costo = duracion_horas * self.precio_hora
         costo_final = self.aplicar_impuestos_y_descuento(costo, impuestos, descuento)
         return costo_final
-
-# Reservas
-
-class Reserva:
-    def __init__(self, cliente, servicio, duracion, estado):
-        self.cliente = cliente
-        self.servicio = servicio
-        self.duracion = duracion
-        self.estado = estado
-
-    def confirmar(self):
-        self.estado = "Confirmada"
-
-
