@@ -142,7 +142,7 @@ class ServicioAlquilerEquipos(Servicio):
         self.validar_parametros()
 
     def describir(self):
-        return f"Alquiler de equipo {self.equipo_tipo}: precio {self.precio_por_dia:.2f} por día"
+        return f"Alquiler de equipo {self.equipo_tipo}: precio {self.precio_hora:.2f} por hora"
 
     def validar_parametros(self, duracion_horas=None, impuestos=None, descuento=None):
         if self.precio_hora <= 0:

@@ -1,6 +1,6 @@
 from datetime import datetime
 from errores import ReservaError, DuracionInvalidaError, DatoInvalidoError
-from logger import logger
+from logger import Logger
 
 class Reserva:
     _contador = 1
@@ -21,11 +21,11 @@ class Reserva:
             if self.__estado != "Pendiente":
                 raise ReservaError("La reserva ya ha sido confirmada o cancelada.")
         except ReservaError as e:
-            logger.error(f"Error al confirmar reserva: {e}")
+            Logger.error(f"Error al confirmar reserva: {e}")
             raise
         else:
             self.__estado = "Confirmada"
-            logger.info(f"Reserva confirmada para cliente {self.__cliente.nombre} con servicio {self.__servicio.nombre}.")
+            Logger.info(f"Reserva confirmada para cliente {self.__cliente.nombre} con servicio {self.__servicio.nombre}.")
 
     def cancelar(self):
         try:
@@ -34,12 +34,12 @@ class Reserva:
             if self.__estado == "Pendiente":
                 raise ReservaError("La reserva no ha sido confirmada, no se puede cancelar.")
             self.__estado = "Cancelada"
-            logger.info(f"Reserva cancelada para cliente {self.__cliente.nombre} con servicio {self.__servicio.nombre}.")
+            Logger.info(f"Reserva cancelada para cliente {self.__cliente.nombre} con servicio {self.__servicio.nombre}.")
         except ReservaError as e:   
-            logger.error(f"Error al cancelar reserva: {e}")
+            Logger.error(f"Error al cancelar reserva: {e}")
             raise
         finally:
-            logger.info(f"Reserva cancelada para cliente {self.__cliente.nombre} con servicio {self.__servicio.nombre}.")
+            Logger.info(f"Reserva cancelada para cliente {self.__cliente.nombre} con servicio {self.__servicio.nombre}.")
 
     def procesar(self):
         try:
@@ -49,10 +49,10 @@ class Reserva:
                 raise DatoInvalidoError("Servicio no válido.")
             self.confirmar()
         except (DatoInvalidoError, ReservaError) as e:
-            logger.error(f"Error al procesar reserva: {e}")
+            Logger.error(f"Error al procesar reserva: {e}")
             raise ReservaError("No se pudo procesar la reserva") from e
         finally:
-            logger.info(f"Intento de procesamiento registrado [{self.__id}]")
+            Logger.info(f"Intento de procesamiento registrado [{self.__id}]")
     
     def describir(self):
         return f"Reserva #{self.__id} para cliente {self.__cliente.nombre} con servicio {self.__servicio.nombre} por {self.__duracion} horas. Estado: {self.__estado}"
