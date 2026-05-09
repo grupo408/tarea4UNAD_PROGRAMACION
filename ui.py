@@ -86,8 +86,41 @@ def tab_servicios(notebook, sistema):
 def tab_reservas(notebook, sistema):
     tab = ttk.Frame(notebook)
     notebook.add(tab, text="Reservas")
-    return tab
 
+    label = ttk.Label(tab, text="Lista de reservas")
+    label.pack(anchor="w", padx=12, pady=(12, 4))
+
+    listbox = tk.Listbox(tab, height=10)
+    listbox.pack(fill="both", expand=True, padx=12, pady=4)
+
+    def refresh_reservas():
+        listbox.delete(0, "end")
+        for reserva in sistema.reservas:
+            listbox.insert("end", reserva.describir())
+    form_frame = ttk.LabelFrame(tab, text="Agregar reserva")
+    form_frame.pack(fill="x", padx=12, pady=8)
+
+    cliente_var  = tk.StringVar()
+    servicio_var = tk.StringVar()
+    duracion_var = tk.StringVar()
+    status_var   = tk.StringVar()
+    
+    ttk.Label(form_frame, text="Cliente:").grid(row=0, column=0, sticky="w", padx=4, pady=2)
+    cliente_combo = ttk.Combobox(form_frame, textvariable=cliente_var, width=28)
+    cliente_combo.grid(row=0, column=1, padx=4, pady=2)
+
+
+    ttk.Label(form_frame, text="Servicio:").grid(row=1, column=0, sticky="w", padx=4, pady=2)
+    servicio_combo = ttk.Combobox(form_frame, textvariable=servicio_var, width=28)
+    servicio_combo.grid(row=1, column=1, padx=4, pady=2)
+
+    
+    ttk.Label(form_frame, text="Duración (horas):").grid(row=2, column=0, sticky="w", padx=4, pady=2)
+    ttk.Entry(form_frame, textvariable=duracion_var, width=30).grid(row=2, column=1, padx=4, pady=2)
+
+    
+    status_label = ttk.Label(form_frame, textvariable=status_var, foreground="red")
+    status_label.grid(row=3, column=0, columnspan=2, sticky="w", padx=4, pady=2)
 
 def crear_app():
     root = tk.Tk()
