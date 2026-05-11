@@ -90,7 +90,7 @@ def tab_servicios(notebook, sistema):
     def refresh_servicios():
         listbox.delete(0, "end")
         for servicio in sistema.servicios:
-            listbox.insert("end", servicio.descripcion())
+            listbox.insert("end", servicio.describir())
     form_frame = ttk.LabelFrame(tab, text="Agregar servicio")
     form_frame.pack(fill="x", padx=12, pady=8)
 
