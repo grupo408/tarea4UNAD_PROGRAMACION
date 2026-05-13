@@ -13,3 +13,5 @@ class Logger:
     @staticmethod
     def error(mensaje):
         Logger.log(f"ERROR: {mensaje}")
+        
+logger = Logger()

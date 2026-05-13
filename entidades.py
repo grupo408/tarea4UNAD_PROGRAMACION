@@ -5,6 +5,14 @@ class EntidadGeneral(ABC):
     def __init__(self, id=None):
         self.id = id
 
+    @abstractmethod
+    def describir(self):
+        pass
+    
+    @abstractmethod
+    def validar(self):
+        pass
+
 class Cliente(EntidadGeneral):
     _contador = 1
     def __init__(self, nombre, documento, email, telefono):
@@ -26,7 +34,9 @@ class Cliente(EntidadGeneral):
     @nombre.setter
     def nombre(self, valor):
         if not valor or not valor.strip():
-            raise DatoInvalidoError("El nombre no puede estar vacío.")  
+            raise DatoInvalidoError("El nombre no puede estar vacío.")
+        if not all(c.isalpha() or c.isspace() for c in valor.strip()):
+            raise DatoInvalidoError("El nombre solo puede contener letras.")
         self.__nombre = valor 
     
     @property

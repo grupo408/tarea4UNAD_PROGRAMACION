@@ -39,7 +39,7 @@ class Reserva:
             Logger.error(f"Error al cancelar reserva: {e}")
             raise
         finally:
-            Logger.info(f"Reserva cancelada para cliente {self.__cliente.nombre} con servicio {self.__servicio.nombre}.")
+            Logger.info(f"Intento de cancelación registrado [{self.__id}]")
 
     def procesar(self):
         try:
