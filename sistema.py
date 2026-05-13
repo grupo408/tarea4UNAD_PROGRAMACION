@@ -139,7 +139,7 @@ class Sistema:
 
         Logger.info(
             f"Reserva registrada: "
-            f"{reserva.id}"
+            f"{reserva.describir()}"
         )
 
     def listar_clientes(self):

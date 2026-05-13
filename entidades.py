@@ -8,8 +8,8 @@ from abc import ABC, abstractmethod
 
 class EntidadGeneral(ABC):
 
-    def __init__(self, id=None):
-        self.id = id
+    def __init__(self):
+        pass
 
 class Cliente(EntidadGeneral):
 
@@ -44,7 +44,9 @@ class Cliente(EntidadGeneral):
     def nombre(self, valor):
 
         if not valor or not valor.strip():
-            raise DatoInvalidoError("El nombre no puede estar vacío.")  
+            raise DatoInvalidoError("El nombre no puede estar vacío.")
+        if not all(c.isalpha() or c.isspace() for c in valor.strip()):
+            raise DatoInvalidoError("El nombre solo puede contener letras y espacios.")
         self.__nombre = valor 
     
     @property
@@ -142,20 +144,13 @@ class Cliente(EntidadGeneral):
 
 class Servicio(EntidadGeneral, ABC):
 
-    def __init__(
-        self,
-        id=None,
-        nombre=None,
-        precio_hora=0.0
-    ):
-
-        super().__init__(id)
-
-        if not nombre or not nombre.strip():
+    def __init__(self, id=None, nombre=None, precio_hora=0.0):
+        super().__init__()
+        if not nombre:
             raise DatoInvalidoError(
                 "El nombre del servicio no puede estar vacío."
             )
-
+             
         if precio_hora <= 0:
             raise DatoInvalidoError(
                 "El precio por hora debe ser mayor que cero."

@@ -241,7 +241,8 @@ def tab_reservas(notebook, sistema):
             status_var.set(f"❌ {e}")
         except ValueError:
             status_var.set("❌ La duración debe ser un número.")
-
+        except Exception as e:
+            status_var.set(f"❌  {e}")
     
     cliente_combo["values"] = [c.nombre for c in sistema.clientes]
     servicio_combo["values"] = [s.nombre for s in sistema.servicios]
